@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Saúde e Cuidados Pessoais</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Estilo da página inicial */
+        .intro {
+            text-align: center;
+            background-color: #2980b9;
+            color: white;
+            padding: 2rem;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        p {
+            font-size: 1.2rem;
+        }
+
+        /* Menu expansivo */
+        nav {
+            background-color: #3498db;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .hamburger {
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            padding: 1rem;
+            cursor: pointer;
+        }
+
+        .menu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: none;
+            background-color: #3498db;
+            transition: max-height 0.3s ease;
+        }
+
+        .menu li {
+            text-align: center;
+            padding: 1rem;
+            border-bottom: 1px solid #2980b9;
+        }
+
+        .menu li a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .menu li:hover {
+            background-color: #2980b9;
+        }
+
+        .menu.open {
+            display: block;
+        }
+
+        /* Estilo das seções */
+        section {
+            padding: 2rem;
+            margin: 1rem 0;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        section h2 {
+            color: #2980b9;
+        }
+
+        /* Estilo da calculadora de IMC */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        form label {
+            font-size: 1.1rem;
+        }
+
+        form input {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        form button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 0.7rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        form button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Design responsivo */
+        @media (max-width: 768px) {
+            nav {
+                text-align: center;
+            }
+
+            .menu {
+                display: none;
+                overflow: hidden;
+                max-height: 0;
+            }
+
+            .menu.open {
+                display: block;
+                max-height: 300px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            nav {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .menu {
+                display: flex;
+                gap: 1rem;
+            }
+
+            .menu li {
+                display: inline-block;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section class="intro">
+        <h1>Bem-vindo ao seu Guia de Saúde e Cuidados Pessoais</h1>
+        <p>Explore dicas e informações sobre alimentação, exercícios, saúde mental e muito mais!</p>
+    </section>
+
+    <nav>
+        <button class="hamburger">☰</button>
+        <ul class="menu">
+            <li><a href="#home">Início</a></li>
+            <li><a href="#alimentacao">Alimentação</a></li>
+            <li><a href="#exercicios">Exercícios</a></li>
+            <li><a href="#saude-mental">Saúde Mental</a></li>
+            <li><a href="#calculadora-imc">Calculadora IMC</a></li>
+        </ul>
+    </nav>
+
+    <section id="calculadora-imc">
+        <h2>Calculadora de IMC</h2>
+        <form id="imc-form">
+            <label for="peso">Peso (kg):</label>
+            <input type="number" id="peso" required>
+            <label for="altura">Altura (m):</label>
+            <input type="number" step="0.01" id="altura" required>
+            <button type="submit">Calcular IMC</button>
+        </form>
+        <div id="resultado"></div>
+    </section>
+
+    <section id="alimentacao">
+        <h2>Alimentação Saudável</h2>
+        <p>Mantenha uma dieta equilibrada com esses nutrientes essenciais...</p>
+    </section>
+
+    <section id="exercicios">
+        <h2>Exercícios Físicos</h2>
+        <p>Veja sugestões de atividades físicas para diferentes níveis...</p>
+    </section>
+
+    <section id="saude-mental">
+        <h2>Saúde Mental</h2>
+        <p>Confira estratégias para cuidar da sua saúde mental e emocional...</p>
+    </section>
+
+    <script>
+        document.querySelector(".hamburger").addEventListener("click", function() {
+            document.querySelector(".menu").classList.toggle("open");
+        });
+
+        document.getElementById("imc-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const peso = parseFloat(document.getElementById("peso").value);
+            const altura = parseFloat(document.getElementById("altura").value);
+            const imc = (peso / (altura * altura)).toFixed(2);
+            let classificacao = "";
+
+            if (imc < 18.5) classificacao = "Baixo peso";
+            else if (imc < 24.9) classificacao = "Peso normal";
+            else if (imc < 29.9) classificacao = "Sobrepeso";
+            else classificacao = "Obesidade";
+
+            document.getElementById("resultado").textContent = `Seu IMC é ${imc} (${classificacao})`;
+        });
+    </script>
+</body>
+</html>
